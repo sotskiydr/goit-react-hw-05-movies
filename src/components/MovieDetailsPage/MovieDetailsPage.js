@@ -34,6 +34,8 @@ export default function MovieDetailsPage() {
           <ul>
             <li>
               <NavLink to={`/movies/${id}/cast`}>Cast</NavLink>
+            </li>
+            <li>
               <NavLink to={`/movies/${id}/reviews`}>Reviews</NavLink>
             </li>
           </ul>
