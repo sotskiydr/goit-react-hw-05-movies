@@ -1,30 +1,33 @@
 // import './App.css';
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Navigation from './components/Navigation/Navigation';
-import HomePage from './components/HomePage/HomePage';
-import MoviesPage from './components/MoviesPage/MoviesPage';
-import MovieDetailsPage from './components/MovieDetailsPage/MovieDetailsPage';
+// import Navigation from './components/Navigation/Navigation';
+// import HomePage from './components/HomePage/HomePage';
+// import MoviesPage from './components/MoviesPage/MoviesPage';
+// import MovieDetailsPage from './components/MovieDetailsPage/MovieDetailsPage';
 
-// import api from './api/api-service';
-// const data = new api();
-// data.getTrandingMovie().then(data => console.log(data.results));
-// data.getQueryMovie('sex').then(data => console.log(data.results));
-// data.getDetailsMovie(5).then(data => console.log(data));
-// data.getCreditsMovie(5).then(data => console.log(data));
-// data.getReviewsMovie(5).then(data => console.log(data));
+const Navigation = lazy(() => import('./components/Navigation/Navigation'));
+const HomePage = lazy(() => import('./components/HomePage/HomePage'));
+const MoviesPage = lazy(() => import('./components/MoviesPage/MoviesPage'));
+const MovieDetailsPage = lazy(() =>
+  import('./components/MovieDetailsPage/MovieDetailsPage'),
+);
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <Navigation />
-      <Routes>
-        <Route path="/" element={<HomePage />} exact></Route>
-        <Route path="/movies" element={<MoviesPage />}></Route>
-        <Route path="/movies/:movieId/*" element={<MovieDetailsPage />}></Route>
-        <Route path="*" element={<HomePage />}></Route>
-      </Routes>
+      <Suspense fallback={<div>download</div>}>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<HomePage />} exact></Route>
+          <Route path="/movies" element={<MoviesPage />}></Route>
+          <Route
+            path="/movies/:movieId/*"
+            element={<MovieDetailsPage />}
+          ></Route>
+          <Route path="*" element={<HomePage />}></Route>
+        </Routes>
+      </Suspense>
     </div>
   );
 }
-
-export default App;
