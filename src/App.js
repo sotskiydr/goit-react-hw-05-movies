@@ -1,10 +1,8 @@
-// import './App.css';
+import './App.css';
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-// import Navigation from './components/Navigation/Navigation';
-// import HomePage from './components/HomePage/HomePage';
-// import MoviesPage from './components/MoviesPage/MoviesPage';
-// import MovieDetailsPage from './components/MovieDetailsPage/MovieDetailsPage';
+import Stack from '@mui/material/Stack';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const Navigation = lazy(() => import('./components/Navigation/Navigation'));
 const HomePage = lazy(() => import('./components/HomePage/HomePage'));
@@ -16,7 +14,13 @@ const MovieDetailsPage = lazy(() =>
 export default function App() {
   return (
     <div className="App">
-      <Suspense fallback={<div>download</div>}>
+      <Suspense
+        fallback={
+          <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+            <LinearProgress color="success" />
+          </Stack>
+        }
+      >
         <Navigation />
         <Routes>
           <Route path="/" element={<HomePage />} exact></Route>

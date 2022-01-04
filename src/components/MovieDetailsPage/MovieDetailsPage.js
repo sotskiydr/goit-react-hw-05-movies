@@ -21,8 +21,10 @@ export default function MovieDetailsPage() {
   }, [id]);
 
   function handleBack(e) {
-    const query = api.getQuery();
-    query ? navigate(`/movies/?query=${query}`) : navigate('/');
+    const { paramsP, paramsQ } = api.getParams();
+    paramsQ
+      ? navigate(`/movies/?query=${paramsQ}&page=${paramsP}`)
+      : navigate('/');
   }
 
   return (
@@ -36,11 +38,15 @@ export default function MovieDetailsPage() {
         >
           go back
         </button>
-        <img
-          src={`https://www.themoviedb.org/t/p/w500${movie.poster_path}`}
-          alt={id}
-          width="300"
-        ></img>
+        {movie.poster_path ? (
+          <img
+            src={`https://www.themoviedb.org/t/p/w500${movie.poster_path}`}
+            alt={id}
+            width="300"
+          ></img>
+        ) : (
+          <img src="/noPhoto.jpg" alt={id} width="300"></img>
+        )}
 
         <h2>{movie.title}</h2>
         <p>popularity: {movie.popularity}</p>

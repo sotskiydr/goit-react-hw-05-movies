@@ -22,11 +22,7 @@ export default function Reviews({ id }) {
                 width={50}
               ></img>
             ) : (
-              <img
-                src={`http://surl.li/barxa`}
-                alt={review.author}
-                width={50}
-              ></img>
+              <img src="/noPhoto.jpg" alt={review.author} width={50}></img>
             )}
             <h3>{review.author}</h3>
             <p>{review.content}</p>

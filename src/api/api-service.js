@@ -1,5 +1,6 @@
 const KEY = 'api_key=9b0c2f9965f33f91e75ff619d689bb58';
-let q = null;
+let paramsQ = null;
+let paramsP = null;
 async function fetchMovies(url) {
   try {
     const response = await fetch(url);
@@ -9,19 +10,23 @@ async function fetchMovies(url) {
   }
 }
 
-export function getTrandingMovie() {
-  q = null;
-  return fetchMovies(`https://api.themoviedb.org/3/trending/movie/week?${KEY}`);
-}
-export function getQueryMovie(query) {
-  q = query;
+export function getTrandingMovie(page) {
+  paramsQ = null;
+  paramsP = null;
   return fetchMovies(
-    `https://api.themoviedb.org/3/search/movie?${KEY}&language=en-US&page=1&include_adult=true&query=${query}`,
+    `https://api.themoviedb.org/3/trending/movie/week?${KEY}&page=${page}`,
+  );
+}
+export function getQueryMovie(query, page = 1) {
+  paramsQ = query;
+  paramsP = page;
+  return fetchMovies(
+    `https://api.themoviedb.org/3/search/movie?${KEY}&language=en-US&page=1&include_adult=true&query=${query}&page=${page}`,
   );
 }
 
-export function getQuery() {
-  return q;
+export function getParams() {
+  return { paramsQ, paramsP };
 }
 
 export function getDetailsMovie(id) {

@@ -21,11 +21,7 @@ export default function Cast({ id }) {
                   width="200"
                 ></img>
               ) : (
-                <img
-                  src={`http://surl.li/barxa`}
-                  alt={author.name}
-                  width="200"
-                ></img>
+                <img src="/noPhoto.jpg" alt={author.name} width="200"></img>
               )}
               <h3>{author.name}</h3>
               <p>{author.character}</p>
