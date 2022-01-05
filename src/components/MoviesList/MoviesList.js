@@ -11,7 +11,6 @@ export default function MoviesList({ dataMovies }) {
               className={styles.img}
               src={`https://www.themoviedb.org/t/p/w500${movie.poster_path}`}
               alt={movie.id}
-              width="300"
             ></img>
           ) : (
             <img

@@ -1,4 +1,5 @@
 import * as api from '../../api/api-service';
+import styles from './MoviesPage.module.scss';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Container, Pagination, Stack } from '@mui/material';
@@ -39,33 +40,54 @@ export default function MoviesPage() {
   }
 
   return (
-    <div>
+    <div className={styles.page}>
       <form
+        className={styles.form}
         onSubmit={e => {
           handleSubmit(e);
         }}
       >
-        <button type="submit">Search</button>
+        <button
+          className={styles.GoBackBtn}
+          type="button"
+          onClick={e => {
+            handleBack(e);
+          }}
+        >
+          go back
+        </button>
         <input
+          placeholder={paramsQuery ? paramsQuery : 'Please enter your query'}
+          className={styles.input}
           onChange={e => {
             handleChangeValue(e);
           }}
         />
+        <button className={styles.searchBtn} type="submit">
+          Search
+        </button>
       </form>
-      <button
-        type="button"
-        onClick={e => {
-          handleBack(e);
-        }}
-      >
-        go back
-      </button>
       {movies && (
-        <ul>
+        <ul className={styles.list}>
           {movies.results.map(movie => {
             return (
-              <li key={movie.id}>
-                <NavLink to={`/movies/${movie.id}`}>{movie.title}</NavLink>
+              <li className={styles.item} key={movie.id}>
+                <NavLink className={styles.link} to={`/movies/${movie.id}`}>
+                  {movie.poster_path ? (
+                    <img
+                      className={styles.img}
+                      src={`https://www.themoviedb.org/t/p/w500${movie.poster_path}`}
+                      alt={movie.id}
+                    ></img>
+                  ) : (
+                    <img
+                      className={styles.img}
+                      src="/noSignal.jpg"
+                      alt={movie.id}
+                    ></img>
+                  )}
+                  <p className={styles.title}>{movie.title}</p>
+                </NavLink>
               </li>
             );
           })}
@@ -80,6 +102,10 @@ export default function MoviesPage() {
                 page={page}
                 onChange={(e, valuePage) => {
                   navigate(`/movies/?query=${paramsQuery}&page=${valuePage}`);
+                  window.scrollTo({
+                    top: 80,
+                    behavior: 'smooth',
+                  });
                 }}
                 sx={{ marginY: 3, marginX: 'auto' }}
               />

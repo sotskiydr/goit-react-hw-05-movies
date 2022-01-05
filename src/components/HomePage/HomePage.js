@@ -6,7 +6,7 @@ import styles from './HomePage.module.scss';
 export default function HomePage() {
   const [movies, setMovies] = useState(null);
   const [page, setPage] = useState(1);
-  const [pageQty, setPageQty] = useState(1);
+  const [pageQty, setPageQty] = useState(null);
 
   useEffect(() => {
     api.getTrandingMovie(page).then(data => {
@@ -31,6 +31,10 @@ export default function HomePage() {
               page={page}
               onChange={(e, value) => {
                 setPage(value);
+                window.scrollTo({
+                  top: 80,
+                  behavior: 'smooth',
+                });
               }}
               sx={{ marginY: 3, marginX: 'auto' }}
             />
