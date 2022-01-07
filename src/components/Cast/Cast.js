@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as api from '../../api/api-service';
+import styles from './Cast.module.scss';
 
 export default function Cast({ id }) {
   const [authors, setAuthors] = useState(null);
@@ -10,21 +11,25 @@ export default function Cast({ id }) {
 
   return (
     authors && (
-      <ul>
+      <ul className={styles.list}>
         {authors.map(author => {
           return (
-            <li key={author.cast_id}>
+            <li className={styles.item} key={author.cast_id}>
               {author.profile_path ? (
                 <img
+                  className={styles.img}
                   src={`https://www.themoviedb.org/t/p/w500${author.profile_path}`}
                   alt={author.name}
-                  width="200"
                 ></img>
               ) : (
-                <img src="/noPhoto.jpg" alt={author.name} width="200"></img>
+                <img
+                  src="/noPhoto.jpg"
+                  className={styles.img}
+                  alt={author.name}
+                ></img>
               )}
-              <h3>{author.name}</h3>
-              <p>{author.character}</p>
+              <h3 className={styles.title}>{author.name}</h3>
+              <p className={styles.description}>{author.character}</p>
             </li>
           );
         })}

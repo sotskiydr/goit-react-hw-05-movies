@@ -1,0 +1,32 @@
+.list {
+  list-style: none;
+}
+
+.item {
+  position: relative;
+  background-color: rgb(228, 225, 225);
+  padding: 15px;
+  border-radius: 15px;
+  width: 100%;
+}
+
+.item:not(:last-child) {
+  margin-bottom: 30px;
+}
+.user {
+  display: flex;
+  &::after {
+    position: absolute;
+    top: 80px;
+    left: 30px;
+    content: '';
+    width: 95%;
+    border: 1px solid rgb(121, 118, 118);
+  }
+}
+
+.img {
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+}
